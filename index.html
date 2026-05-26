@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intelligenza Artificiale in Medicina | Convegno Nazionale</title>
+  <meta name="description" content="1° Convegno Nazionale Intelligenza Artificiale in Medicina: nuovi scenari per la prevenzione, la diagnosi e la cura." />
+  <style>
+    :root {
+      --bg: #f7fafc;
+      --surface: #ffffff;
+      --surface-soft: #eef7ff;
+      --text: #122033;
+      --muted: #5c6b7a;
+      --primary: #155e95;
+      --primary-dark: #0b3b63;
+      --accent: #24a7b8;
+      --warm: #f0b849;
+      --border: #dde9f2;
+      --shadow: 0 24px 60px rgba(15, 48, 83, 0.12);
+      --radius: 28px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(26px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes floatSoft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 12px 28px rgba(21, 94, 149, .22); }
+      50% { box-shadow: 0 18px 42px rgba(21, 94, 149, .34); }
+    }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(36, 167, 184, .20), transparent 38rem),
+        radial-gradient(circle at top right, rgba(240, 184, 73, .18), transparent 32rem),
+        linear-gradient(180deg, #f5fbff 0%, var(--bg) 48%, #ffffff 100%);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(100% - 32px, var(--max)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, .86);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(221, 233, 242, .88);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand { font-weight: 900; letter-spacing: -.04em; font-size: 1.15rem; line-height: 1.1; }
+    .brand span { color: var(--primary); display: block; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: .94rem;
+      color: var(--muted);
+    }
+
+    .menu a:hover { color: var(--primary-dark); }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      box-shadow: 0 12px 28px rgba(21, 94, 149, .22);
+      transition: .2s ease;
+      border: 0;
+    }
+    .button { animation: pulseGlow 4s ease-in-out infinite; }
+    .button:hover { transform: translateY(-2px); background: var(--primary-dark); animation-play-state: paused; }
+    .button.secondary { background: #fff; color: var(--primary-dark); border: 1px solid var(--border); box-shadow: none; animation: none; }
+    .button.large-cta {
+      min-height: 58px;
+      padding: 0 32px;
+      font-size: 1.08rem;
+    }
+
+    .hero { padding: 92px 0 72px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 44px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      color: var(--primary-dark);
+      background: rgba(36, 167, 184, .14);
+      border: 1px solid rgba(36, 167, 184, .28);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: .9rem;
+    }
+    h1 {
+      font-size: clamp(2.75rem, 6.2vw, 6.2rem);
+      line-height: .94;
+      letter-spacing: -.075em;
+      margin: 24px 0;
+    }
+    .lead { max-width: 760px; font-size: 1.18rem; color: var(--muted); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+
+    .hero-card {
+      animation: floatSoft 6s ease-in-out infinite;
+      background: linear-gradient(160deg, var(--primary-dark), var(--primary) 56%, var(--accent));
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card:after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .13);
+      right: -90px;
+      bottom: -90px;
+    }
+    .info-row { padding: 21px 0; border-bottom: 1px solid rgba(255,255,255,.22); position: relative; z-index: 1; }
+    .info-row:last-child { border-bottom: 0; }
+    .info-label { text-transform: uppercase; letter-spacing: .14em; font-size: .74rem; opacity: .74; font-weight: 900; }
+    .info-value { margin-top: 6px; font-size: 1.22rem; font-weight: 850; line-height: 1.24; }
+
+    section { padding: 72px 0; animation: fadeUp .8s ease both; }
+    .section-head { max-width: 850px; margin-bottom: 34px; }
+    .kicker { color: var(--primary); text-transform: uppercase; letter-spacing: .16em; font-size: .78rem; font-weight: 950; }
+    h2 { font-size: clamp(2.1rem, 4vw, 3.45rem); line-height: 1; letter-spacing: -.055em; margin: 10px 0 16px; }
+    .section-head p { color: var(--muted); font-size: 1.08rem; }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .entities-main {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      justify-content: center;
+    }
+    .patrocini-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      margin-top: 20px;
+    }
+    .patrocini-card {
+      width: 100%;
+    }
+    .card {
+      animation: fadeUp .7s ease both;
+      transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 14px 38px rgba(15, 48, 83, .06);
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 52px rgba(15, 48, 83, .11);
+      border-color: rgba(36, 167, 184, .42);
+    }
+    .card h3 { margin: 0 0 8px; font-size: 1.22rem; letter-spacing: -.02em; }
+    .card p, .card li { color: var(--muted); }
+    .card ul { margin: 12px 0 0; padding-left: 20px; }
+
+    .entity-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .entity-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .patrocini-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .entity-tile {
+      min-height: 116px;
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 14px;
+      align-items: center;
+      padding: 14px;
+      border: 1px solid rgba(221, 233, 242, .9);
+      border-radius: 16px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fcff 100%);
+    }
+    .entity-logo {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      border-radius: 12px;
+      background: #fff;
+      border: 1px solid rgba(221, 233, 242, .76);
+    }
+    .entity-logo img {
+      width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .entity-logo.text-logo {
+      color: var(--primary-dark);
+      font-weight: 950;
+      text-align: center;
+      line-height: 1.05;
+      font-size: .84rem;
+    }
+    .entity-name {
+      margin: 0;
+      color: var(--text);
+      font-weight: 900;
+      line-height: 1.24;
+      letter-spacing: -.015em;
+    }
+    .entity-note {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: .92rem;
+      line-height: 1.35;
+    }
+
+    .organizers-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .scientific-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 520px;
+    }
+    .organizer-card {
+      text-align: center;
+      padding: 18px;
+    }
+    .organizer-photo {
+      width: min(100%, 160px);
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      overflow: hidden;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 35% 24%, rgba(255, 255, 255, .75), transparent 28%),
+        linear-gradient(145deg, rgba(21, 94, 149, .96), rgba(36, 167, 184, .88));
+      color: #fff;
+      font-size: 2rem;
+      font-weight: 950;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .32), 0 14px 30px rgba(15, 48, 83, .12);
+    }
+    .organizer-photo img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+    }
+    .organizer-card h3 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+    .organizer-card p {
+      margin: 6px 0 0;
+      font-size: .92rem;
+    }
+
+    .pill-list { display: flex; flex-wrap: wrap; gap: 10px; }
+    .pill { display: inline-flex; padding: 8px 12px; border-radius: 999px; background: var(--surface-soft); color: var(--primary-dark); font-weight: 800; font-size: .9rem; }
+
+    .agenda {
+      transition: background .2s ease, transform .2s ease;
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 20px;
+      align-items: start;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+    }
+    .agenda[data-speaker-popup="false"] {
+      cursor: default;
+    }
+    .agenda:last-child { border-bottom: 0; }
+    .agenda:hover { background: rgba(238, 247, 255, .58); transform: translateX(4px); border-radius: 16px; padding-left: 12px; padding-right: 12px; }
+    .agenda[data-speaker-popup="false"]:hover {
+      transform: none;
+    }
+    .agenda:focus-visible {
+      outline: 3px solid rgba(36, 167, 184, .52);
+      outline-offset: 4px;
+      border-radius: 16px;
+    }
+    .time { font-weight: 950; color: var(--primary-dark); }
+    .tag { display: inline-block; margin-bottom: 8px; padding: 4px 10px; border-radius: 999px; background: var(--surface-soft); color: var(--primary-dark); font-size: .78rem; font-weight: 900; }
+    .agenda h3 { margin: 0 0 6px; }
+    .agenda p { margin: 0; color: var(--muted); }
+
+    .program-tabs { display: flex; flex-wrap: wrap; gap: 12px; margin: 26px 0 22px; }
+    .program-tab {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--primary-dark);
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: .2s ease;
+      box-shadow: 0 10px 26px rgba(15, 48, 83, .05);
+    }
+    .program-tab:hover { transform: translateY(-2px); }
+    .program-tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .day { display: none; margin-top: 10px; }
+    .day.active { display: block; animation: fadeUp .45s ease both; }
+    .day-title { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 12px; }
+    .day-title h3 { font-size: 1.65rem; margin: 0; letter-spacing: -.035em; }
+    .day-title span { color: var(--muted); font-weight: 800; }
+
+    .highlight {
+      background: linear-gradient(135deg, #0b3b63, #155e95 58%, #24a7b8);
+      color: white;
+      border-radius: var(--radius);
+      padding: 42px;
+      box-shadow: var(--shadow);
+    }
+    .highlight p { color: rgba(255,255,255,.84); }
+
+    .map-widget {
+      margin-top: 24px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: 0 14px 38px rgba(15, 48, 83, .06);
+      aspect-ratio: 4 / 3;
+      background: var(--surface-soft);
+    }
+    .map-widget iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    footer { padding: 44px 0; background: #0f2433; color: rgba(255,255,255,.78); }
+    footer strong { color: white; }
+    .footer-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .footer-logo {
+      width: 82px;
+      height: 82px;
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .94);
+    }
+    .footer-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .speaker-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .speaker-modal.is-open { display: flex; }
+    .speaker-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(6, 23, 39, .62);
+      backdrop-filter: blur(8px);
+    }
+    .speaker-dialog {
+      position: relative;
+      width: min(100%, 760px);
+      max-height: min(88vh, 760px);
+      overflow: auto;
+      background: #fff;
+      color: var(--text);
+      border-radius: 24px;
+      box-shadow: 0 30px 90px rgba(6, 23, 39, .28);
+      border: 1px solid rgba(221, 233, 242, .95);
+    }
+    .speaker-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(238, 247, 255, .95);
+      color: var(--primary-dark);
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .speaker-content {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 28px;
+      padding: 34px;
+    }
+    .speaker-photo {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 22px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 35% 24%, rgba(255, 255, 255, .72), transparent 28%),
+        linear-gradient(145deg, rgba(21, 94, 149, .96), rgba(36, 167, 184, .88));
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.2rem;
+      font-weight: 950;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .32), 0 18px 36px rgba(15, 48, 83, .14);
+    }
+    .speaker-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .speaker-meta {
+      margin-bottom: 10px;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      font-size: .74rem;
+      font-weight: 950;
+    }
+    .speaker-name {
+      margin: 0 0 6px;
+      font-size: clamp(1.8rem, 4vw, 2.75rem);
+      line-height: 1;
+      letter-spacing: -.045em;
+    }
+    .speaker-role {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+    .speaker-talk {
+      margin: 0 0 18px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: var(--surface-soft);
+      color: var(--primary-dark);
+      font-weight: 850;
+      line-height: 1.35;
+    }
+    .speaker-description {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+    body.modal-open { overflow: hidden; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .grid-2, .grid-3, .entities-main { grid-template-columns: 1fr; }
+      .organizers-grid, .scientific-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .entity-grid.two, .patrocini-grid { grid-template-columns: 1fr; }
+      .menu { display: none; }
+      .hero { padding-top: 64px; }
+      .agenda { grid-template-columns: 1fr; gap: 6px; }
+      .day-title { display: block; }
+      .footer-content { align-items: flex-start; flex-direction: column; }
+      .speaker-content { grid-template-columns: 1fr; }
+      .speaker-photo { max-width: 220px; }
+    }
+
+    @media (max-width: 560px) {
+      .entity-tile {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+      .entity-logo {
+        width: 116px;
+      }
+      .organizers-grid, .scientific-grid { grid-template-columns: 1fr; }
+      .speaker-modal { padding: 14px; }
+      .speaker-content { padding: 26px 20px; }
+      .speaker-close { top: 10px; right: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#" class="brand">IA in Medicina <span>1° Convegno Nazionale</span></a>
+      <nav class="menu" aria-label="Navigazione principale">
+        <a href="#obiettivo">Obiettivo</a>
+        <a href="#struttura">Struttura</a>
+        <a href="#programma">Programma</a>
+        <a href="#comitato-scientifico">Comitato Scientifico</a>
+        <a href="#organizzatori">Organizzatori</a>
+        <a href="#promotori">Promotori</a>
+        <a href="#sede">Sede</a>
+      </nav>
+      <a class="button" href="https://forms.gle/nQ9ZgYMw1XM94YJCA">Link iscrizione</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">19–20 Giugno 2026 · Palazzo Innovazione, Salerno</span>
+          <h1>Intelligenza Artificiale in Medicina</h1>
+          <p class="lead">Nuovi scenari per la prevenzione, la diagnosi e la cura. Un convegno nazionale per discutere opportunità, limiti, responsabilità etiche e impatti organizzativi dell'IA in ambito sanitario.</p>
+          <div class="hero-actions">
+            <a class="button" href="#obiettivo">Scopri il convegno</a>
+            <a class="button secondary" href="https://forms.gle/nQ9ZgYMw1XM94YJCA">Iscriviti al convegno!</a>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Informazioni evento">
+          <div class="info-row">
+            <div class="info-label">Evento</div>
+            <div class="info-value">1° Convegno Nazionale</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">Date</div>
+            <div class="info-value">19 e 20 Giugno 2026</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">Sede</div>
+            <div class="info-value">Palazzo Innovazione · Salerno</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">Promotori</div>
+            <div class="info-value">Università degli Studi di Salerno · AITIM</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="obiettivo">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Obiettivo del Convegno</span>
+          <h2>L'IA come alleato del professionista della salute</h2>
+          <p>L'intelligenza artificiale sta trasformando ricerca, formazione e salute. Il convegno offre a medici ospedalieri, clinici, professionisti della medicina territoriale, medici di base, pediatri, studiosi e cittadini una panoramica dei nuovi scenari aperti dall'IA in ambito sanitario.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card"><h3>Prevenzione</h3><p>Analisi predittive su larga scala, valutazione personalizzata del rischio e modelli epidemiologici avanzati per anticipare l'insorgenza delle malattie.</p></article>
+          <article class="card"><h3>Diagnosi</h3><p>Sistemi di supporto decisionale multimodali basati su imaging, segnali biomedici e biosanitari, generazione di ipotesi collegando ricerca di base e trial clinici per migliorare accuratezza e tempestività.</p></article>
+          <article class="card"><h3>Cura</h3><p>Terapie mirate, medicina di precisione e monitoraggio intelligente per la gestione delle cronicità e dei nuovi modelli di assistenza territoriale.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="struttura">
+      <div class="container grid-2">
+        <div class="section-head">
+          <span class="kicker">Struttura del Convegno</span>
+          <h2>Quattro sessioni in due giornate</h2>
+          <p>Il 19 giugno è dedicato agli aspetti scientifici e alle applicazioni cliniche. Il 20 giugno ospita la sezione istituzionale, una tavola rotonda e la presentazione di progetti nazionali in ambito salute.</p>
+        </div>
+        <div class="card">
+          <h3>Temi principali</h3>
+          <div class="pill-list">
+            <span class="pill">IA generativa</span>
+            <span class="pill">Modelli fondazionali</span>
+            <span class="pill">Explainable AI</span>
+            <span class="pill">Federated learning</span>
+            <span class="pill">Drug discovery</span>
+            <span class="pill">Medical imaging</span>
+            <span class="pill">Robotica</span>
+            <span class="pill">Terapie digitali</span>
+            <span class="pill">Neurologia</span>
+            <span class="pill">Riabilitazione</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="programma">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Programma</span>
+          <h2>Agenda preliminare</h2>
+          <p>Programma su due giornate: sessione scientifica e casi applicativi il 19 giugno, istituzioni e progetti PNRR il 20 giugno.</p>
+        </div>
+
+        <div class="program-tabs" role="tablist" aria-label="Seleziona il giorno del programma">
+          <button class="program-tab active" type="button" role="tab" aria-selected="true" aria-controls="day-19" data-day="day-19">Venerdì 19 Giugno</button>
+          <button class="program-tab" type="button" role="tab" aria-selected="false" aria-controls="day-20" data-day="day-20">Sabato 20 Giugno</button>
+        </div>
+
+        <div class="day active" id="day-19" role="tabpanel">
+          <div class="day-title"><h3>Venerdì 19 Giugno 2026</h3><span>Sessione scientifica e casi applicativi</span></div>
+          <div class="card">
+            <!--
+              Popup CV per singola casella:
+              - data-speaker-popup="false" disattiva il popup.
+              - data-speaker-name, data-speaker-role, data-speaker-photo e data-speaker-description modificano solo quella casella.
+              Esempio: <div class="agenda" data-speaker-name="Nome Cognome" data-speaker-photo="src/foto.jpg" data-speaker-description="CV...">
+            -->
+            <div class="agenda" data-speaker-popup="false"><div class="time">08:30</div><div><span class="tag">Registrazione</span><h3>Accoglienza partecipanti</h3></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">09:30</div><div><span class="tag">Istituzioni</span><h3>Saluti delle Istituzioni</h3><p>DIEM, DIFARMA, DIPMED, Comune di Salerno, Presidente AITIM e altri rappresentanti.</p></div></div>
+            <div class="agenda"><div class="time">10:00</div><div><span class="tag">Plenaria</span><h3>IA generativa e Modelli fondazionali: l'IA che aiuta la diagnosi e la cura</h3><p>Prof. Pierluigi Ritrovato · Università degli Studi di Salerno</p></div></div>
+            <div class="agenda"><div class="time">10:40</div><div><span class="tag">Ricerca</span><h3>Protein Language Models per la medicina di precisione: predire l'effetto delle varianti e progettare proteina con l'IA</h3><p>Dott. Gennaro Gambardella · TIGEM</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">11:00</div><div><span class="tag">Pausa</span><h3>Coffee break</h3></div></div>
+            <div class="agenda"><div class="time">11:30</div><div><span class="tag">Clinica</span><h3>IA per follow-up e pianificazione terapeutica in ambito clinico</h3><p>Prof. Giorgio De Nunzio · Università del Salento</p></div></div>
+            <div class="agenda"><div class="time">11:50</div><div><span class="tag">Dati</span><h3>Federated learning: l'intelligenza artificiale GDPR compliant</h3><p>Prof. Mario Bochicchio · Università degli Studi di Bari</p></div></div>
+            <div class="agenda"><div class="time">12:10</div><div><span class="tag">Farmaci</span><h3>IA per drug discovery e drug repurposing: Smart scissors and Smarter Algorithms</h3><p>Dott. Francesco Iorio · Human Technopole</p></div></div>
+            <div class="agenda"><div class="time">12:30</div><div><span class="tag">Bene comune</span><h3>Gestire l'I.A. per il bene comune in Sanità</h3><p>Prof. Riccardo Resciniti · Fondazione COTEC, BridgeX</p></div></div>
+            <div class="agenda"><div class="time">12:50</div><div><span class="tag">Etica</span><h3>IA ed aspetti etici nella ricerca clinica</h3><p>Fabrizio Clemente · CNR, Comitato Etico Campania 2</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">13:10</div><div><span class="tag">Pausa</span><h3>Pranzo</h3></div></div>
+            <div class="agenda"><div class="time">14:30</div><div><span class="tag">Plenaria</span><h3>IA explainability: quando l'IA spiega le sue scelte</h3><p>Prof. Angelo Marcelli · Università degli Studi di Salerno</p></div></div>
+            <div class="agenda"><div class="time">15:10</div><div><span class="tag">Casi applicativi</span><h3>IA in Diagnostica per Immagini: Applicazioni attuali e prospettive future</h3><p>Dott. Gianantonio Pellicanò · Presidente @ITIM, Neuroradiologia Istituto Prosperius Villa Cherubini IFCA di Firenze</p></div></div>
+            <div class="agenda"><div class="time">15:30</div><div><span class="tag">Casi applicativi</span><h3>Robotica e intelligenza artificiale nella neuroriabilitazione: sfide scientifiche, tecnologiche, etiche e sociali</h3><p>Prof. Stefano Mazzoleni · Politecnico di Bari, Scuola IMT Alti Studi Lucca</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">15:50</div><div><span class="tag">Pausa</span><h3>Coffee break</h3></div></div>
+            <div class="agenda"><div class="time">16:15</div><div><span class="tag">Casi applicativi</span><h3>IA e terapie digitali</h3><p>Prof. Eugenio Santoro · Istituto Mario Negri</p></div></div>
+            <div class="agenda"><div class="time">16:35</div><div><span class="tag">Casi applicativi</span><h3>Intelligenza Artificiale in Neuroscienze tra pratica clinica e ricerca scientifica</h3><p>Prof. Giuseppe Lanza · Università di Catania, IRCCS Oasi di Troina</p></div></div>
+            <div class="agenda"><div class="time">16:55</div><div><span class="tag">Casi applicativi</span><h3>Neuroradiologia interventistica e intelligenza artificiale, sinergie e criticità</h3><p>Prof.ssa Elisa Ciceri · Istituto Neurologico Carlo Besta</p></div></div>
+            <div class="agenda"><div class="time">17:15</div><div><span class="tag">Casi applicativi</span><h3>IA ed endoscopia digestiva</h3><p>Dott. Attilio Maurano · Segretario Nazionale ISSE, Italian Society of Surgical Endoscopy</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">17:35</div><div><span class="tag">Chiusura</span><h3>Fine lavori</h3></div></div>
+          </div>
+        </div>
+
+        <div class="day" id="day-20" role="tabpanel" hidden>
+          <div class="day-title"><h3>Sabato 20 Giugno 2026</h3><span>Istituzioni, tavola rotonda e progetti PNRR</span></div>
+          <div class="card">
+            <div class="agenda" data-speaker-popup="false"><div class="time">09:30</div><div><span class="tag">Istituzioni</span><h3>Saluti delle istituzioni</h3><p>Rettore UNISA e Presidente Regione Campania.</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">10:15</div><div><span class="tag">Europa</span><h3>Commissione Europea DG Health</h3></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">10:35</div><div><span class="tag">MUR</span><h3>Intervento MUR</h3><p>Direttore generale o Sottosegretario.</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">10:55</div><div><span class="tag">Salute</span><h3>Ministero della Salute o Istituto Superiore di Sanità</h3><p>Ministro, Sottosegretario, Direttrice ISS o Evaristo Cisbani.</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">11:15</div><div><span class="tag">Pausa</span><h3>Coffee break</h3></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">11:30</div><div><span class="tag">AGENAS</span><h3>Piattaforma MIA - Medicina e Intelligenza Artificiale</h3><p>Responsabile Innovazione.</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">11:55</div><div><span class="tag">Caso studio</span><h3>IA e innovazione nella ricerca clinica: un caso di studio</h3><p>Prof. Carlo Tacchetti</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">12:15</div><div><span class="tag">Tavola rotonda</span><h3>IA in medicina</h3><p>Con Human Technopole, TIGEM, relatori e responsabili dei progetti.</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">13:15</div><div><span class="tag">Pausa</span><h3>Pranzo</h3></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">14:30</div><div><span class="tag">Progetti PNRR</span><h3>HEAL ITALIA</h3></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">14:55</div><div><span class="tag">Progetti PNRR</span><h3>AGE-IT</h3><p>Università degli Studi di Milano-Bicocca.</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">15:20</div><div><span class="tag">Progetti PNRR</span><h3>Sviluppo di Terapia Genica e Farmaci con Tecnologia a RNA</h3><p>Prof.ssa Elena Ciaglia</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">15:45</div><div><span class="tag">Pausa</span><h3>Coffee break</h3></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">16:00</div><div><span class="tag">Progetti PNRR</span><h3>D³4Health</h3><p>Prof. Michele Mappi, Prof.ssa Lucia Cascone</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">16:25</div><div><span class="tag">Progetti PNRR</span><h3>PRP@CERIC</h3><p>Prof. Edoardo Sommella, Prof. Pierluigi Ritrovato</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">16:50</div><div><span class="tag">Progetti PNRR</span><h3>FIT4MedicalRobotics e Centro di eccellenza CoE-Rehab</h3><p>Riabilitazione con Robotica e Tecnologie Avanzate · Irene Giovanna Aprile e Marco Germanotta, Fondazione Carlo Don Gnocchi.</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">17:15</div><div><span class="tag">Chiusura</span><h3>Fine lavori</h3></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="comitato-scientifico">
+      <div class="container">
+        <div class="section-head">
+          <!-- <span class="kicker">Comitato Scientifico</span> -->
+          <h2>Cordinamento scientifico</h2>
+          <!-- <p>Referenti scientifici del convegno.</p> -->
+        </div>
+        <div class="organizers-grid scientific-grid">
+          <a class="card organizer-card" href="https://docenti.unisa.it/003741/home" target="_blank" rel="noopener noreferrer">
+            <div class="organizer-photo" ><img src="src/pj.jpg" alt="Pierluigi Ritrovato"></div>
+            <h3>Prof. Pierluigi Ritrovato</h3>
+            <p>Professore Ordinario DIEM@UniSA</p>
+          </a>
+          <a class="card organizer-card" href="https://docenti.unisa.it/005820/home" target="_blank" rel="noopener noreferrer">
+            <div class="organizer-photo"><img src="src/pietro_campiglia.jpg" alt="Pietro Campiglia"></div>
+            <h3>Prof. Pietro Campiglia</h3>
+            <p>Professore Ordinario DIFARMA@UniSA</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="organizzatori">
+      <div class="container">
+        <div class="section-head">
+          <!-- <span class="kicker">Comitato organizzatore</span> -->
+          <h2>Comitato organizzatore</h2>
+          <!-- <p>Riferimenti organizzativi del convegno.</p> -->
+        </div>
+        <div class="organizers-grid">
+          <a class="card organizer-card" href="https://docenti.unisa.it/003741/home" target="_blank" rel="noopener noreferrer">
+            <div class="organizer-photo"><img src="src/pj.jpg" alt="Pierluigi Ritrovato"></div>
+            <h3>Prof. Pierluigi Ritrovato</h3>
+            <p>Professore Ordinario @UniSA</p>
+          </a>
+          <a class="card organizer-card" href="https://docenti.unisa.it/003780/home" target="_blank" rel="noopener noreferrer">
+            <div class="organizer-photo"><img src="src/angelo_marcelli.jpg" alt="Angelo Marcelli"></div>
+            <h3>Prof. Angelo Marcelli</h3>
+            <p>Professore Ordinario @UniSA</p>
+          </a>
+          <a class="card organizer-card" href="https://www.unisalento.it/scheda-utente/-/people/mario.bochicchio" target="_blank" rel="noopener noreferrer">
+            <div class="organizer-photo"><img src="src/mario_Bochicchio.jpeg" alt="Mario Bochicchio"></div>
+            <h3>Prof. Mario Bochicchio</h3>
+            <p>Professore Associato @UniSalento</p>
+          </a>
+          <a class="card organizer-card" href="https://www.unimib.it/giancarlo-mauri" target="_blank" rel="noopener noreferrer">
+            <div class="organizer-photo"><img src="src/Giancarlo_Mauri.jpg" alt="Giancarlo Mauri"></div>
+            <h3>Prof. Giancarlo Mauri</h3>
+            <p>Professore Emerito @UniMIB</p>
+          </a>
+          <a class="card organizer-card" href="https://www.associazioneaitim.it/direttivo/francesco-sicurello/" target="_blank" rel="noopener noreferrer">
+            <div class="organizer-photo"><img src="src/Francesco_Sicurello.webp" alt="Francesco Sicurello"></div>
+            <h3>Prof. Francesco Sicurello</h3>
+            <p>Presidente Emerito di @ITIM</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="promotori">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Promotori e collaborazioni</span>
+          <h2>Enti coinvolti</h2>
+        </div>
+        <div class="grid-3 entities-main">
+           <article class="card">
+            <h3>Proponenti</h3>
+            <div class="entity-grid">
+              <div class="entity-tile">
+                <div class="entity-logo"><img src="src/unisa.png" alt="Logo Università degli Studi di Salerno"></div>
+                <div>
+                  <p class="entity-name">Università degli Studi di Salerno</p>
+                  <p class="entity-note">Ateneo proponente del convegno.</p>
+                </div>
+              </div>
+              <div class="entity-tile">
+                <div class="entity-logo"><img src="src/logo_aitim.png" alt="Logo AITIM"></div>
+                <div>
+                  <p class="entity-name">AITIM</p>
+                  <p class="entity-note">Associazione Italiana di Telemedicina e Informatica Medica.</p>
+                  <br>
+                  <p class="entity-name">GIAM@ITIM</p>
+                  <p class="entity-note">Gruppo Intelligenza Artificiale in Medicina.</p>
+                </div>
+  
+              </div>
+              <!--
+              <div class="entity-tile">
+                <div class="entity-logo"><img src="src/logo_aitim.png" alt="Logo AITIM"></div>
+                <div>
+                  <p class="entity-name">GIAM@ITIM</p>
+                  <p class="entity-note">Gruppo Intelligenza Artificiale in Medicina.</p>
+                </div>
+              </div>
+            -->
+            </div>
+          </article>
+          <article class="card">
+            <h3>Dipartimenti UNISA</h3>
+            <div class="entity-grid">
+              <div class="entity-tile">
+                <div class="entity-logo"><img src="src/LogoDiem.png" alt="Logo DIEM"></div>
+                <div>
+                  <p class="entity-name">DIEM</p>
+                  <p class="entity-note">Dipartimento di Ingegneria dell'Informazione ed Elettrica e Matematica Applicata.</p>
+                </div>
+              </div>
+              <div class="entity-tile">
+                <div class="entity-logo"><img src="src/logo-dipmed.png" alt="Logo Dipartimento di Medicina, Chirurgia e Odontoiatria"></div>
+                <div>
+                  <p class="entity-name">Medicina, Chirurgia e Odontoiatria</p>
+                  <p class="entity-note">Dipartimento “Scuola Medica Salernitana”.</p>
+                </div>
+              </div>
+              <div class="entity-tile">
+                <div class="entity-logo"><img src="src/logo-difarma.png" alt="Logo Dipartimento di Farmacia"></div>
+                <div>
+                  <p class="entity-name">DIFARMA</p>
+                  <p class="entity-note">Dipartimento di Farmacia.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="patrocini-row">
+          <article class="card patrocini-card">
+            <h3>Patrocini</h3>
+            <div class="entity-grid patrocini-grid">
+              <div class="entity-tile">
+                <div class="entity-logo"><img src="src/logo_ruggi_daragona.png" alt="Logo Azienda Ospedaliero Universitaria Ruggi d'Aragona"></div>
+                <div>
+                  <p class="entity-name">AOU Ruggi d'Aragona</p>
+                  <p class="entity-note">Azienda Ospedaliero Universitaria San Giovanni di Dio Ruggi d'Aragona.</p>
+                </div>
+              </div>
+              <div class="entity-tile">
+                <div class="entity-logo"><img src="src/logo_asl_salerno.png" alt="Logo ASL Salerno"></div>
+                <div>
+                  <p class="entity-name">ASL Salerno</p>
+                  <p class="entity-note">Azienda Sanitaria Locale Salerno.</p>
+                </div>
+              </div>
+              <div class="entity-tile">
+                <div class="entity-logo"><img src="src/logo_ordine_dei_medici.png" alt="Logo Ordine dei Medici di Salerno"></div>
+                <div>
+                  <p class="entity-name">Ordine dei Medici di Salerno</p>
+                  <p class="entity-note">Patrocinio istituzionale.</p>
+                </div>
+              </div>
+              <div class="entity-tile">
+                <div class="entity-logo"><img src="src/logo-bg-dark.svg" alt="Logo Fondazione COTEC"></div>
+                <div>
+                  <p class="entity-name">Fondazione COTEC</p>
+                  <p class="entity-note">Fondazione per l'innovazione e la competitività tecnologica.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sede">
+      <div class="container grid-2">
+        <div class="section-head">
+          <span class="kicker">Sede</span>
+          <h2>Palazzo Innovazione, Salerno</h2>
+          <p>Il convegno si svolgerà a Palazzo Innovazione, Salerno, il 19 e 20 giugno 2026.</p>
+          <div class="map-widget">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.150136291156!2d14.755644276693168!3d40.68092783951623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133bc228d223c0d7%3A0xdd2b0bd1c72d0374!2sPalazzo%20Innovazione!5e1!3m2!1sit!2sit!4v1779354126151!5m2!1sit!2sit" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mappa Palazzo Innovazione, Salerno"></iframe>
+          </div>
+        </div>
+        <div class="highlight">
+          <span class="kicker" style="color:white">Partecipa</span>
+          <h2>Conferma la tua presenza</h2>
+          <p>Per partecipare al convegno è <b>obbligatorio</b> compilare il form di registrazione. La partecipazione è aperta a ricercatori, clinici, professionisti e aziende del settore.</p>
+          
+          <a class="button secondary large-cta" href="https://forms.gle/nQ9ZgYMw1XM94YJCA" style="margin-top:18px">Compila il Form</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="speaker-modal" id="speaker-modal" aria-hidden="true">
+    <div class="speaker-backdrop" data-close-speaker></div>
+    <article class="speaker-dialog" role="dialog" aria-modal="true" aria-labelledby="speaker-name">
+      <button class="speaker-close" type="button" aria-label="Chiudi popup" data-close-speaker>&times;</button>
+      <div class="speaker-content">
+        <div class="speaker-photo" id="speaker-photo" aria-hidden="true"></div>
+        <div>
+          <div class="speaker-meta" id="speaker-meta">Curriculum relatore</div>
+          <h2 class="speaker-name" id="speaker-name"></h2>
+          <p class="speaker-role" id="speaker-role"></p>
+          <p class="speaker-talk" id="speaker-talk"></p>
+          <p class="speaker-description" id="speaker-description"></p>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    const programTabs = document.querySelectorAll('.program-tab');
+    const programDays = document.querySelectorAll('.day[role="tabpanel"]');
+    const agendaItems = document.querySelectorAll('.agenda');
+    const speakerModal = document.querySelector('#speaker-modal');
+    const speakerPhoto = document.querySelector('#speaker-photo');
+    const speakerName = document.querySelector('#speaker-name');
+    const speakerRole = document.querySelector('#speaker-role');
+    const speakerTalk = document.querySelector('#speaker-talk');
+    const speakerDescription = document.querySelector('#speaker-description');
+    let lastFocusedAgenda = null;
+
+    const speakerProfiles = {
+      'Prof. Pierluigi Ritrovato': {
+        photo: 'src/pj.jpg',
+        role: 'Universita degli Studi di Salerno',
+        description: 'Professore ordinario al DIEM dell\'Universita degli Studi di Salerno. Si occupa di tecnologie digitali, intelligenza artificiale, sistemi intelligenti per formazione, sanita digitale e supporto ai processi decisionali.'
+      },
+      'Prof. Angelo Marcelli': {
+        photo: 'src/angelo_marcelli.jpg',
+        role: 'Universita degli Studi di Salerno',
+        description: "Angelo Marcelli è Professore Ordinario di Sistemi di Elaborazione delle Informazioni presso il DIEM dell’Università di Salerno e Direttore Scientifico del Laboratorio di Computazione Naturale. Angelo Marcelli è autore di più di 250 articoli scientifici pubblicati in riviste, libri e atti di congressi internazionali, curatore di un volume sul movimento umano, e di numerosi special issues su riviste internazionali sui temi dell’analisi della scrittura per il supporto alla diagnosi di patologie neurodegenerativi e dei disturbi dell’apprendimento, la verifica di autenticità di documenti manoscritti, ii modelli neurocomputazionali dell’apprendimento motorio, i modelli e le tecniche di intelligenza artificiali di ispirazione naturale. E’ Co-Editor della rivista Journal of Forensic Document Examination, Area Editor della rivista International Journal of Document Analysis and Recognition, Associate Editor della rivista Pattern Recognition Letters, è stato ed è membro del comitato di programma delle piu’ importanti conferenze internazionali sull’analisi delle immagini, il pattern recognition, l’analisi ed il riconoscimento del manoscritto. E’ Life member dell’IEEE, dell’IEEE Computer Society, dell'IEEE Computational Intelligence Society, del AssociazioneItaliana per la ricerca in Computer Vision, Pattern recognition e Machine Learning. Dal 2006 al 2013 è stato Presidente della International Graphonomics Society."
+      },
+      'Prof. Mario Bochicchio': {
+        photo: 'src/mario_Bochicchio.jpeg',
+        role: 'Universita degli Studi del Salento',
+        description: 'Docente universitario e ricercatore nell\'area dei sistemi informativi e delle tecnologie digitali. Interviene sul federated learning come approccio per sviluppare intelligenza artificiale rispettosa della protezione dei dati.'
+      },
+      'Prof. Pietro Campiglia': {
+        photo: 'src/pietro_campiglia.jpg',
+        role: 'Universita degli Studi di Salerno',
+        description: 'Professore ordinario al DIFARMA dell\'Universita degli Studi di Salerno, con competenze in scienze farmaceutiche, analisi biochimiche e ricerca traslazionale applicata alla salute.'
+      },
+      'Prof. Giancarlo Mauri': {
+        photo: 'src/Giancarlo_Mauri.jpg',
+        role: 'Universita degli Studi di Milano-Bicocca',
+        description: 'Professore emerito e studioso di informatica, modelli computazionali e sistemi complessi. Ha contribuito allo sviluppo della ricerca italiana su bioinformatica, computazione naturale e intelligenza artificiale.'
+      },
+      'Prof. Francesco Sicurello': {
+        photo: 'src/Francesco_Sicurello.webp',
+        role: 'AITIM',
+        description: 'Presidente emerito AITIM, attivo nella promozione della telemedicina, dell\'informatica medica e dell\'innovazione digitale nei servizi sanitari.'
+      },
+      'Dott. Gennaro Gambardella': {
+        photo: 'src/gennaro_gambardella.jpg',
+        role: 'TIGEM',
+        description: "Gennaro Gambardella è ricercatore, Principal Investigator e docente specializzato in genomica computazionale, biologia dei sistemi e intelligenza artificiale applicata alla medicina di precisione. Con una solida formazione accademica e un percorso internazionale maturato presso istituzioni di eccellenza come l’Università Federico II di Napoli, il King’s College London e il TIGEM, guida attività di ricerca innovative focalizzate sull’interpretazione delle variazioni genetiche e sulla comprensione dei meccanismi molecolari delle malattie. La sua attività integra metodologie avanzate di machine learning, analisi multi-omica, genomica funzionale e modelli predittivi basati su AI per trasformare grandi quantità di dati biologici complessi in strumenti utili alla ricerca e allo sviluppo di nuove strategie terapeutiche. Autore di pubblicazioni scientifiche di rilievo internazionale, coordina progetti orientati alla scoperta di biomarcatori e allo sviluppo di soluzioni innovative per la medicina personalizzata e la ricerca biomedica avanzata."
+      },
+      'Prof. Giorgio De Nunzio': {
+        photo: 'src/giorgio_de_nuunzio.png',
+        role: 'Universita del Salento',
+        description: "Giorgio De Nunzio si è laureato in Fisica presso l'Università del Salento (Lecce, Italia) nel 1991 e ha conseguito il Dottorato di Ricerca presso l'Università di Montpellier II nel 1995. Dal 2001 lavora nel campo della Fisica Applicata presso il Dipartimento di Matematica e Fisica “Ennio De Giorgi” dell'Università del Salento. La sua attività di ricerca si concentra sull'applicazione della Fisica e dell'Informatica alla Medicina (inclusi la diagnostica per immagini e l'Intelligenza Artificiale) e ai Beni Culturali. È responsabile del Laboratorio di Fisica Biomedica e Ambiente presso l'Università del Salento e coordinatore del gruppo ADAM ([http://adam.unisalento.it](http://adam.unisalento.it/)). La ​​sua attività didattica comprende corsi di Fisica e IA per la Medicina, Machine Learning, C++ e Python."
+      },
+      'Dott. Francesco Iorio': {
+        photo: 'src/francesco_iorio.png',
+        role: 'Human Technopole',
+        description: "Francesco Iorio è Senior Research Group Leader presso  Human Technopole￼ (Milano, Italia), dove guida un gruppo di ricerca attivo nel campi della biologia computazionale, genomica funzionale e intelligenza artificiale applicata alla scoperta di nuovi bersagli terapeutici in oncologia. La sua attività scientifica è focalizzata sullo studio e sulla previsione di come il contesto genetico e molecolare delle cellule tumorali influenzi le vulnerabilità del cancro e la risposta ai trattamenti, attraverso l’integrazione di screening CRISPR, profilazione multi-omica e metodologie computazionali avanzate. Nel corso della sua carriera ha fornito contributi di primo piano all’iniziativa internazionale  Cancer Dependency Map￼, partecipando allo sviluppo e all’analisi di grandi dataset di screening CRISPR-Cas9 e alla definizione di framework analitici per l’identificazione di biomarcatori e nuovi target terapeutici. Il suo lavoro ha contribuito sia alla scoperta di vulnerabilità selettive dei tumori sfruttabili terapeuticamente, sia alla creazione di risorse informatiche oggi ampiamente utilizzate dalla comunità scientifica internazionale. Prima di entrare in Human Technopole, ha svolto attività di ricerca presso il  Wellcome Sanger Institute￼ e  EMBL-EBI￼ (Cambridge, Regno Unito), contribuendo a numerosi studi di farmacogenomica e genomica funzionale su larga scala pubblicati su riviste scientifiche di altissimo profilo, tra cui Cell e Nature. È autore di oltre 80 pubblicazioni peer-reviewed. Ha ottenuto numerosi finanziamenti competitivi internazionali, tra cui un European Research Council Consolidator Grant a supporto del progetto DepSHOCK e un Investigator Grant di Fondazione AIRC. È inoltre tra i promotori del consorzio PRECISE, un’iniziativa internazionale che mira a sviluppare modelli predittivi e meccanicisticamente fondati delle dipendenze oncologiche e delle interazioni di letalità sintetica, con l’obiettivo di accelerare lo sviluppo di strategie di medicina di precisione in oncologia."
+      },
+      'Prof. Riccardo Resciniti': {
+        photo: 'src/riccardo_resciniti.jpeg',
+        role: 'Fondazione COTEC, BridgeX',
+        description: "Riccardo Resciniti è professore ordinario di Economia e gestione delle imprese presso l’Università del Sannio (dal 2008), ateneo in cui è stato componente del Senato Accademico (2022-25) ed è oggi anche coordinatore del Dottorato di Ricerca in “Persona, Mercato, Istituzioni” e componente del consiglio direttivo del Centro di servizi SHerIL. È, inoltre, presidente della fondazione “Sostenibilità e Valore Ets” e socio onorario della Società Italiana di Marketing, di cui è stato il presidente (2018-21). È stato, infine, presidente del Fondo Pensione Espero per la scuola (2023-26), della Fondazione Cueim (2025) e del consiglio di indirizzo Cueim (2023-25); nonché componente dell’Accademia di Economia Aziendale (2018-21), della Società Italiana di Management (2028-21). È autore di oltre 180 pubblicazioni sui temi del Management e del Marketing."
+      },
+      'Fabrizio Clemente': {
+        photo: 'src/fabrizio_clemente.jpg',
+        role: 'CNR, Comitato Etico Campania 2',
+        description: "Fabrizio Clemente (Ph.D), Professore di Controllo di Qualità e Organizzazione Sanitaria presso l'Università Tor Vergata – Roma. ricercatore associato presso il Consiglio Nazionale delle Ricerche – Istituto di Cristallografia. Esperto del Dipartimento della Trasformazione Digitale della Presidenza del Consiglio dei Ministri per l’Ecosistema dei Dati Sanitari. Componente GEV Valorizzazione delle Conoscenze VQR – ANVUR. Già Responsabile della Unità di Ricerca CNR attiva presso l’Ospedale Pediatrico Santobono Pausilipon di Napoli. Esperto di etica e regolamentazione nella ricerca clinica, è membro del Comitato Etico Territoriale per la Sperimentazione Clinica Campania 2. Si è sempre occupato di ricerca e sviluppo per la salute. Come Innovation Manager promuove e coordina diversi progetti di ricerca ed innovazione per introdurre nuove tecnologie in sanità. Responsabile e consulente in diverse organizzazioni sanitarie per la progettazione e l'implementazione di modelli di assistenza innovativi basati sulle ICT."
+      },
+      'Dott. Gianantonio Pellicano': {
+        photo: 'src/Giannantonio_Pellicano.jpeg',
+        role: 'AITIM, Istituto Prosperius Villa Cherubini IFCA di Firenze',
+        description: "Il Dott. Giannantonio Pellicanò, nato a Catanzaro il 9 febbraio 1958, si è laureato in Medicina e Chirurgia presso l’Università degli Studi di Firenze nel 1985, conseguendo successivamente nella stessa sede l’abilitazione all’esercizio della professione medica. È iscritto all’Ordine dei Medici Chirurghi di Firenze con numero di iscrizione 8348. Ha conseguito la specializzazione in Radiodiagnostica nel 1990 e in Neurochirurgia nel 1996, sviluppando nel corso della sua carriera una consolidata esperienza nell’ambito della neuroradiologia diagnostica e interventistica. Ha ricoperto il ruolo di Professore a contratto presso l’Università degli Studi di Firenze, occupandosi dell’insegnamento della Neuroradiologia nelle Scuole di Specializzazione in Neurologia, Neurochirurgia, Neurofisiopatologia e Audiologia, oltre a svolgere attività didattica in Neuroradiologia e Informatica Radiologica presso la Scuola di Specializzazione in Radiodiagnostica. Il suo percorso professionale si è sviluppato all’interno di importanti strutture ospedaliere e universitarie fiorentine. Dopo l’esperienza iniziale come Assistente Radiologo presso l’Ospedale Santa Maria Annunziata di Firenze, ha proseguito la propria attività presso l’Unità Operativa di Neuroradiologia dell’Ospedale di Careggi e successivamente presso l’U.O. di Radiodiagnostica dell’Università di Firenze, dedicandosi alla diagnostica neuroradiologica mediante Risonanza Magnetica, Tomografia Computerizzata e Angiografia. Dal 1997 al 2013 ha ricoperto il ruolo di Dirigente Medico di I livello con funzioni di Vice-Direttore e attualmente svolge attività presso la SOD di Neuroradiologia dell’Azienda Ospedaliero-Universitaria di Careggi. Parallelamente all’attività diagnostica, ha sviluppato una significativa esperienza nella neuroradiologia interventistica spinale, con particolare competenza in vertebroplastica, biopsie vertebrali, drenaggio di ascessi paravertebrali e trattamenti mediante ossigeno-ozonoterapia intradiscale, intraforaminale e paravertebrale sia lombare che cervicale. È autore di oltre 220 pubblicazioni scientifiche e di due monografie dedicate alla neuroradiologia. Da sempre interessato all’innovazione tecnologica applicata alla medicina, si occupa di telemedicina e teleradiologia dal 1986, contribuendo con numerose pubblicazioni scientifiche e partecipando a progetti ministeriali dedicati al settore. È membro dell’Associazione Italiana di Neuroradiologia, della Società Europea di Neuroradiologia e della SIRM (Società Italiana di Radiologia Medica). Ricopre inoltre il ruolo di Presidente dell’Associazione Italiana di Telemedicina e Informatica Medica e della Nuova Federazione Italiana di Ossigeno-Ozonoterapia."
+      },
+      'Prof. Stefano Mazzoleni': {
+        photo: 'src/stefano_mazzoleni.jpg',
+        role: 'Politecnico di Bari, Scuola IMT Alti Studi Lucca',
+        description: "Stefano Mazzoleni (MsC Computer Engineering 2002, PhD 2007, IEEE Senior member) è Professore Associato di Bioingegneria presso il Dipartimento di Ingegneria Elettrica e Informatica del Politecnico di Bari e presso la Scuola IMT Alti Studi Lucca. È Professore Affiliato alla Scuola Superiore Sant'Anna di Pisa. È autore di oltre 230 pubblicazioni scientifiche su riviste peer-reviewed e conferenze nazionali/internazionali, è coordinatore scientifico di numerosi progetti di ricerca nazionali e internazionali ed è membro di diversi comitati editoriali di riviste scientifiche internazionali nei settori della robotica, della bioingegneria e della riabilitazione. I suoi interessi di ricerca includono i) la progettazione, lo sviluppo e la validazione di sistemi robotici e meccatronici per la neuroriabilitazione, ii) lo sviluppo di modelli di analisi multimodale di dati (misurazioni cinematiche, variabili fisiologiche, scale di valutazione funzionale) e iii) lo sviluppo di algoritmi di machine learning  e deep learning per la neuroriabilitazione"
+      },
+      'Prof. Eugenio Santoro': {
+        role: 'Istituto Mario Negri',
+        description: 'Ricercatore impegnato nella sanita digitale, nelle terapie digitali e nell\'uso responsabile delle tecnologie informatiche per migliorare prevenzione, cura e comunicazione sanitaria.'
+      },
+      'Prof. Giuseppe Lanza': {
+        photo: 'src/giuseppe_lanza.png',
+        role: 'Universita di Catania, IRCCS Oasi di Troina',
+        description: "Giuseppe Lanza, MD PhD, è Professore ordinario di Scienze Tecniche Mediche e Chirurgiche Avanzate presso l’Università di Catania. Si è perfezionato, in qualità di Visiting Clinical Research Fellow, in Neurofisiologia Clinica presso il Department of Neuroscience della Newcastle University (UK), ove è stato anche selezionato per una borsa di ricerca promossa dalla European Federation of Neurological Societies. Clinicamente, opera come Dirigente medico neurologo in convenzione e Responsabile dell’Unità Operativa di Ricerca in Neurofisiologia Clinica presso l’IRCCS Oasi Maria SS. di Troina (EN). Più recentemente, ha conseguito un Master in Ricerca Clinica ed uno in Neuroriabilitazione, oltre ad aver ricevuto il prestigioso riconoscimento internazionale “Elio Lugaresi Award” dalla World Sleep Society. È Editor di numerosi journals ed autore di >200 pubblicazioni su riviste scientifiche internazionali peer-reviewed, oltre ad aver tenuto >100 relazioni a congressi nazionali ed internazionali. L’h-index attuale (Scopus) è pari a 47, con >5.000 citazioni totali."
+      },
+      'Prof.ssa Elisa Ciceri': {
+        role: 'Istituto Neurologico Carlo Besta',
+        description: 'Specialista in neuroradiologia interventistica. Approfondisce opportunita, sinergie e criticita dell\'IA nelle procedure e nei percorsi di neuroradiologia.'
+      },
+      'Dott. Attilio Maurano': {
+        photo: 'src/attilio_maurano.jpeg',
+        role: 'Italian Society of Surgical Endoscopy',
+        description: "Il Prof. Attilio Maurano è medico chirurgo ed esperto di riferimento nel campo dell’endoscopia digestiva operativa, con oltre quarant’anni di esperienza clinica, scientifica e organizzativa maturata in ambito sanitario nazionale e internazionale. Laureato in Medicina e Chirurgia nel 1978, ha conseguito diverse specializzazioni, tra cui Chirurgia d’Urgenza, Chirurgia Vascolare e Medicina dello Sport, oltre a percorsi formativi avanzati presso istituzioni di prestigio come la Yale University negli Stati Uniti e la SDA Bocconi di Milano. Ha ricoperto il ruolo di Direttore della Unità Operativa Complessa di Endoscopia Digestiva Chirurgica e successivamente della UOC di Endoscopia Operativa dell’Azienda Ospedaliera Universitaria di Salerno, contribuendo in modo significativo allo sviluppo dell’endoscopia avanzata e delle tecniche diagnostiche e terapeutiche delle patologie gastroenterologiche e bilio-pancreatiche. È stato promotore di servizi innovativi di emergenza endoscopica e Direttore del Centro Regionale di riferimento per l’endoscopia bilio-pancreatica. Autore di numerose pubblicazioni scientifiche, relatore in congressi nazionali e internazionali e docente universitario, svolge inoltre attività di formazione specialistica e ricerca, collaborando con importanti centri internazionali per lo sviluppo di nuove tecnologie in ambito endoscopico."
+      },
+      'Prof. Carlo Tacchetti': {
+        role: 'Ricerca clinica',
+        description: 'Docente e ricercatore nell\'ambito della medicina sperimentale e della ricerca clinica. Il suo intervento presenta un caso di studio su IA e innovazione nei percorsi di ricerca.'
+      },
+      'Prof.ssa Elena Ciaglia': {
+        role: 'Progetti PNRR',
+        description: 'Ricercatrice nel campo delle biotecnologie e delle scienze biomediche. Interviene sullo sviluppo di terapia genica e farmaci basati su tecnologia a RNA.'
+      },
+      'Prof. Michele Mappi': {
+        role: 'Progetto D34Health',
+        description: 'Relatore del progetto D34Health, dedicato all\'integrazione di dati, modelli digitali e innovazione tecnologica per la salute.'
+      },
+      'Prof.ssa Lucia Cascone': {
+        role: 'Progetto D34Health',
+        description: 'Relatrice del progetto D34Health, con focus su ricerca, innovazione e valorizzazione dei dati per applicazioni sanitarie.'
+      },
+      'Prof. Edoardo Sommella': {
+        role: 'Progetto PRP@CERIC',
+        description: 'Docente e ricercatore in ambito farmaceutico e analitico. Interviene sul progetto PRP@CERIC e sulle infrastrutture di ricerca a supporto della salute.'
+      },
+      'Irene Giovanna Aprile': {
+        role: 'Fondazione Carlo Don Gnocchi',
+        description: 'Professionista e ricercatrice nell\'ambito della riabilitazione. Presenta esperienze e prospettive su robotica, tecnologie avanzate e percorsi riabilitativi.'
+      },
+      'Marco Germanotta': {
+        role: 'Fondazione Carlo Don Gnocchi',
+        description: 'Ricercatore nell\'area della riabilitazione robotica e delle tecnologie assistive. Interviene sulle applicazioni cliniche di robotica e IA in riabilitazione.'
+      }
+    };
+
+    programTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const selectedDay = tab.dataset.day;
+
+        programTabs.forEach((item) => {
+          const isActive = item === tab;
+          item.classList.toggle('active', isActive);
+          item.setAttribute('aria-selected', String(isActive));
+        });
+
+        programDays.forEach((day) => {
+          const isActive = day.id === selectedDay;
+          day.classList.toggle('active', isActive);
+          day.hidden = !isActive;
+        });
+      });
+    });
+
+    const normalizeName = (name) => name.replace('Pellicanò', 'Pellicano').trim();
+
+    const initialsFor = (name) => {
+      const cleanName = name.replace(/^(Prof\.ssa|Prof\.|Dott\.|Dott\.ssa)\s+/i, '').trim();
+      return cleanName.split(/\s+/).slice(0, 2).map((part) => part[0]).join('').toUpperCase();
+    };
+
+    const looksLikeSpeaker = (value) => /^(Prof\.ssa|Prof\.|Dott\.ssa|Dott\.)\s+/i.test(value)
+      || ['Fabrizio Clemente', 'Irene Giovanna Aprile', 'Marco Germanotta'].includes(value);
+
+    const parseSpeakerName = (agenda) => {
+      const details = agenda.querySelector('p')?.textContent.trim() || '';
+      if (!details) return 'Relatore da confermare';
+      const candidates = details.split('·').flatMap((part) => part.split(',')).map((part) => part.trim()).filter(Boolean);
+      const firstSpeaker = candidates.find(looksLikeSpeaker);
+      if (!firstSpeaker) return 'Relatore da confermare';
+      return normalizeName(firstSpeaker || 'Relatore da confermare');
+    };
+
+    const buildFallbackProfile = (name, agenda) => {
+      const details = agenda.querySelector('p')?.textContent.trim() || '';
+      const role = details.includes('·') ? details.split('·').slice(1).join('·').trim() : 'Informazioni in aggiornamento';
+      return {
+        role,
+        description: name === 'Relatore da confermare'
+          ? 'Sessione del programma con relatore o rappresentante istituzionale in fase di conferma. Il profilo sara aggiornato appena disponibile.'
+          : 'Profilo sintetico in aggiornamento. Il relatore partecipa al convegno con un contributo collegato al tema indicato nel programma.'
+      };
+    };
+
+    const getAgendaProfile = (agenda) => {
+      const customName = agenda.dataset.speakerName?.trim();
+      const name = customName || parseSpeakerName(agenda);
+      const baseProfile = speakerProfiles[name] || buildFallbackProfile(name, agenda);
+
+      return {
+        name,
+        role: agenda.dataset.speakerRole?.trim() || baseProfile.role,
+        photo: agenda.dataset.speakerPhoto?.trim() || baseProfile.photo,
+        description: agenda.dataset.speakerDescription?.trim() || baseProfile.description,
+        talk: agenda.dataset.speakerTalk?.trim()
+      };
+    };
+
+    const openSpeakerModal = (agenda) => {
+      lastFocusedAgenda = agenda;
+      const profile = getAgendaProfile(agenda);
+      const time = agenda.querySelector('.time')?.textContent.trim();
+      const title = agenda.querySelector('h3')?.textContent.trim();
+      const tag = agenda.querySelector('.tag')?.textContent.trim();
+
+      speakerName.textContent = profile.name;
+      speakerRole.textContent = profile.role;
+      speakerTalk.textContent = profile.talk || `${time} · ${tag} · ${title}`;
+      speakerDescription.textContent = profile.description;
+      speakerPhoto.innerHTML = profile.photo
+        ? `<img src="${profile.photo}" alt="${profile.name}">`
+        : initialsFor(profile.name);
+
+      speakerModal.classList.add('is-open');
+      speakerModal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      speakerModal.querySelector('.speaker-close').focus();
+    };
+
+    const closeSpeakerModal = () => {
+      speakerModal.classList.remove('is-open');
+      speakerModal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+      lastFocusedAgenda?.focus();
+    };
+
+    agendaItems.forEach((agenda) => {
+      if (agenda.dataset.speakerPopup === 'false') {
+        agenda.removeAttribute('role');
+        agenda.removeAttribute('tabindex');
+        agenda.removeAttribute('aria-label');
+        return;
+      }
+
+      agenda.setAttribute('role', 'button');
+      agenda.setAttribute('tabindex', '0');
+      agenda.setAttribute('aria-label', `Apri CV relatore: ${agenda.querySelector('h3')?.textContent.trim()}`);
+      agenda.addEventListener('click', () => openSpeakerModal(agenda));
+      agenda.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openSpeakerModal(agenda);
+        }
+      });
+    });
+
+    document.querySelectorAll('[data-close-speaker]').forEach((closeControl) => {
+      closeControl.addEventListener('click', closeSpeakerModal);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && speakerModal.classList.contains('is-open')) {
+        closeSpeakerModal();
+      }
+    });
+  </script>
+
+  <footer>
+    <div class="container footer-content">
+      <div>
+        <strong>1° Convegno Nazionale · Intelligenza Artificiale in Medicina</strong><br />
+        Nuovi scenari per la prevenzione, la diagnosi e la cura · 19–20 Giugno 2026 · Palazzo Innovazione, Salerno.<br />
+        <p>Email: <a href="mailto:pritrovato@unisa.it">pritrovato@unisa.it</a></p>
+        © 2026 IA in Medicina · Tutti i diritti riservati.
+      </div>
+      <div class="footer-logo">
+        <img src="src/unisa.png" alt="Logo Università degli Studi di Salerno">
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
