@@ -36,6 +36,10 @@
       0%, 100% { box-shadow: 0 12px 28px rgba(21, 94, 149, .22); }
       50% { box-shadow: 0 18px 42px rgba(21, 94, 149, .34); }
     }
+    @keyframes sheen {
+      0% { transform: translateX(-120%) skewX(-16deg); }
+      100% { transform: translateX(220%) skewX(-16deg); }
+    }
     body {
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -105,7 +109,12 @@
       font-size: 1.08rem;
     }
 
-    .hero { padding: 92px 0 72px; }
+    .hero {
+      padding: 92px 0 72px;
+      background:
+        linear-gradient(90deg, rgba(8, 29, 48, .78) 0%, rgba(8, 29, 48, .58) 46%, rgba(8, 29, 48, .30) 100%),
+        url("src/salerno_2.jpg") center / cover no-repeat;
+    }
     .hero-grid {
       display: grid;
       grid-template-columns: 1.12fr .88fr;
@@ -116,9 +125,11 @@
       display: inline-flex;
       gap: 8px;
       align-items: center;
-      color: var(--primary-dark);
-      background: rgba(36, 167, 184, .14);
-      border: 1px solid rgba(36, 167, 184, .28);
+      color: #fff;
+      background: rgba(255, 255, 255, .18);
+      border: 1px solid rgba(255, 255, 255, .42);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, .18);
+      backdrop-filter: blur(8px);
       padding: 8px 14px;
       border-radius: 999px;
       font-weight: 800;
@@ -130,7 +141,12 @@
       letter-spacing: -.075em;
       margin: 24px 0;
     }
+    .hero h1 {
+      color: #fff;
+      text-shadow: 0 8px 28px rgba(0, 0, 0, .28);
+    }
     .lead { max-width: 760px; font-size: 1.18rem; color: var(--muted); }
+    .hero .lead { color: rgba(255, 255, 255, .88); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
 
     .hero-card {
@@ -350,14 +366,124 @@
     .day-title h3 { font-size: 1.65rem; margin: 0; letter-spacing: -.035em; }
     .day-title span { color: var(--muted); font-weight: 800; }
 
-    .highlight {
-      background: linear-gradient(135deg, #0b3b63, #155e95 58%, #24a7b8);
+    .presence-section {
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+      background:
+        linear-gradient(115deg, rgba(255,255,255,.11) 0 1px, transparent 1px 18px),
+        linear-gradient(135deg, #0b3b63, #155e95 52%, #24a7b8);
       color: white;
-      border-radius: var(--radius);
-      padding: 42px;
-      box-shadow: var(--shadow);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.16), inset 0 -1px 0 rgba(6,23,39,.12);
     }
-    .highlight p { color: rgba(255,255,255,.84); }
+    .presence-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.08) 0 1px, transparent 1px 96px);
+      opacity: .8;
+      pointer-events: none;
+    }
+    .presence-section::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 220px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+      animation: sheen 7s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .presence-content {
+      position: relative;
+      z-index: 1;
+      min-height: 360px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      align-items: center;
+      gap: 44px;
+      padding: 70px 0;
+    }
+    .presence-copy {
+      max-width: 800px;
+    }
+    .presence-section .kicker { color: rgba(255,255,255,.78); }
+    .presence-section h2 {
+      margin-bottom: 12px;
+      color: white;
+    }
+    .presence-section p {
+      margin: 0;
+      color: rgba(255,255,255,.84);
+      font-size: 1.08rem;
+    }
+    .presence-section .button {
+      margin-top: 28px;
+    }
+    .presence-visual {
+      position: relative;
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,.20);
+      border-radius: 20px;
+      background: rgba(255,255,255,.09);
+      box-shadow: 0 18px 44px rgba(4, 22, 38, .16);
+      backdrop-filter: blur(12px);
+    }
+    .presence-visual::before,
+    .presence-visual::after {
+      content: "";
+      position: absolute;
+      left: -1px;
+      right: -1px;
+      height: 6px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.42), transparent);
+      opacity: .48;
+    }
+    .presence-visual::before { top: -1px; border-radius: 20px 20px 0 0; }
+    .presence-visual::after { bottom: -1px; border-radius: 0 0 20px 20px; }
+    .presence-date {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: white;
+      font-weight: 950;
+    }
+    .presence-date strong {
+      font-size: 3rem;
+      line-height: .9;
+    }
+    .presence-date span {
+      font-size: 1rem;
+      color: rgba(255,255,255,.78);
+      line-height: 1.15;
+    }
+    .presence-metrics {
+      display: grid;
+      gap: 10px;
+    }
+    .presence-metric {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(255,255,255,.16);
+      color: rgba(255,255,255,.86);
+      font-weight: 850;
+    }
+    .presence-metric:last-child { border-bottom: 0; }
+    .presence-signal {
+      flex: 0 0 auto;
+      width: 36px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.58);
+      box-shadow: 0 0 14px rgba(255,255,255,.22);
+    }
 
     .map-widget {
       margin-top: 24px;
@@ -373,6 +499,64 @@
       height: 100%;
       border: 0;
       display: block;
+    }
+
+    .venue-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 28px;
+      align-items: stretch;
+    }
+    .venue-grid .section-head {
+      max-width: none;
+      margin-bottom: 0;
+    }
+
+    .hotel-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 18px;
+      align-self: center;
+      padding: 22px;
+      border: 1px solid rgba(221, 233, 242, .95);
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 14px 38px rgba(15, 48, 83, .06);
+    }
+    .hotel-card h3 {
+      margin: 6px 0 8px;
+      font-size: 1.28rem;
+      line-height: 1.1;
+      letter-spacing: -.035em;
+    }
+    .hotel-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+    .hotel-card .entity-note {
+      font-size: .94rem;
+      line-height: 1.45;
+    }
+    .hotel-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-width: 150px;
+      min-height: 46px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: var(--primary-dark);
+      color: #fff;
+      text-align: center;
+      font-weight: 900;
+      box-shadow: 0 14px 30px rgba(15, 48, 83, .12);
+      transition: .2s ease;
+    }
+    .hotel-badge:hover {
+      transform: translateY(-2px);
+      background: var(--primary);
     }
 
     footer { padding: 44px 0; background: #0f2433; color: rgba(255,255,255,.78); }
@@ -525,6 +709,17 @@
       .footer-content { align-items: flex-start; flex-direction: column; }
       .speaker-content { grid-template-columns: 1fr; }
       .speaker-photo { max-width: 220px; }
+      .presence-content {
+        grid-template-columns: 1fr;
+        min-height: 420px;
+        align-items: flex-start;
+        gap: 28px;
+        padding: 58px 0;
+      }
+      .presence-section .button { width: 100%; }
+      .presence-visual { width: 100%; }
+      .venue-grid { grid-template-columns: 1fr; }
+      .hotel-badge { width: 100%; }
     }
 
     @media (max-width: 560px) {
@@ -539,6 +734,9 @@
       .speaker-modal { padding: 14px; }
       .speaker-content { padding: 26px 20px; }
       .speaker-close { top: 10px; right: 10px; }
+      .presence-content { min-height: 500px; padding: 50px 0; }
+      .presence-date strong { font-size: 2.7rem; }
+      .presence-metric { align-items: flex-start; flex-direction: column; }
     }
   </style>
 </head>
@@ -607,6 +805,88 @@
       </div>
     </section>
 
+    <section class="presence-section" aria-labelledby="presenza-title">
+      <div class="container presence-content">
+        <div class="presence-copy">
+          <span class="kicker">Partecipa</span>
+          <h2 id="presenza-title">Conferma la tua presenza</h2>
+          <p>La registrazione al convegno è <b>obbligatoria e gratuita</b>, con posti limitati fino a esaurimento disponibilità. La partecipazione è aperta a ricercatori, clinici, professionisti e aziende del settore.</p>
+          <a class="button secondary large-cta" href="https://forms.gle/nQ9ZgYMw1XM94YJCA">Registrati Gratuitamente Ora!</a>
+        </div>
+        <div class="presence-visual" aria-hidden="true">
+          <div class="presence-date">
+            <strong>19-20</strong>
+            <span>Giugno<br>2026</span>
+          </div>
+          <div class="presence-metrics">
+            <div class="presence-metric"><span>Registrazione gratuita</span><span class="presence-signal"></span></div>
+            <div class="presence-metric"><span>Accesso obbligatorio</span><span class="presence-signal"></span></div>
+            <div class="presence-metric"><span>Posti limitati</span><span class="presence-signal"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="comitato-scientifico">
+      <div class="container">
+        <div class="section-head">
+          <!-- <span class="kicker">Comitato Scientifico</span> -->
+          <h2>Cordinamento scientifico</h2>
+          <!-- <p>Referenti scientifici del convegno.</p> -->
+        </div>
+        <div class="organizers-grid scientific-grid">
+          <a class="card organizer-card" href="https://docenti.unisa.it/005820/home" target="_blank" rel="noopener noreferrer">
+            <div class="organizer-photo"><img src="src/pietro_campiglia.jpg" alt="Pietro Campiglia"></div>
+            <h3>Prof. Pietro Campiglia</h3>
+            <p>Professore Ordinario DIFARMA@UniSA</p>
+          </a>
+          <a class="card organizer-card" href="https://docenti.unisa.it/003741/home" target="_blank" rel="noopener noreferrer">
+            <div class="organizer-photo" ><img src="src/pj.jpg" alt="Pierluigi Ritrovato"></div>
+            <h3>Prof. Pierluigi Ritrovato</h3>
+            <p>Professore Ordinario DIEM@UniSA</p>
+          </a>
+          
+        </div>
+      </div>
+    </section>
+
+    <section id="organizzatori">
+      <div class="container">
+        <div class="section-head">
+          <!-- <span class="kicker">Comitato organizzatore</span> -->
+          <h2>Comitato organizzatore</h2>
+          <!-- <p>Riferimenti organizzativi del convegno.</p> -->
+        </div>
+        <div class="organizers-grid">
+          <a class="card organizer-card" href="https://docenti.unisa.it/003780/home" target="_blank" rel="noopener noreferrer">
+            <div class="organizer-photo"><img src="src/angelo_marcelli.jpg" alt="Angelo Marcelli"></div>
+            <h3>Prof. Angelo Marcelli</h3>
+            <p>Professore Ordinario @UniSA</p>
+          </a>
+          <a class="card organizer-card" href="https://www.associazioneaitim.it/direttivo/francesco-sicurello/" target="_blank" rel="noopener noreferrer">
+            <div class="organizer-photo"><img src="src/Francesco_Sicurello.webp" alt="Francesco Sicurello"></div>
+            <h3>Prof. Francesco Sicurello</h3>
+            <p>Presidente Emerito di @ITIM</p>
+          </a>
+          <a class="card organizer-card" href="https://www.unimib.it/giancarlo-mauri" target="_blank" rel="noopener noreferrer">
+            <div class="organizer-photo"><img src="src/Giancarlo_Mauri.jpg" alt="Giancarlo Mauri"></div>
+            <h3>Prof. Giancarlo Mauri</h3>
+            <p>Professore Emerito @UniMIB</p>
+          </a>
+          <a class="card organizer-card" href="https://www.unisalento.it/scheda-utente/-/people/mario.bochicchio" target="_blank" rel="noopener noreferrer">
+            <div class="organizer-photo"><img src="src/mario_Bochicchio.jpeg" alt="Mario Bochicchio"></div>
+            <h3>Prof. Mario Bochicchio</h3>
+            <p>Professore Associato @UniSalento</p>
+          </a>
+          <a class="card organizer-card" href="https://docenti.unisa.it/003741/home" target="_blank" rel="noopener noreferrer">
+            <div class="organizer-photo"><img src="src/pj.jpg" alt="Pierluigi Ritrovato"></div>
+            <h3>Prof. Pierluigi Ritrovato</h3>
+            <p>Professore Ordinario @UniSA</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <section id="struttura">
       <div class="container grid-2">
         <div class="section-head">
@@ -636,7 +916,7 @@
       <div class="container">
         <div class="section-head">
           <span class="kicker">Programma</span>
-          <h2>Agenda preliminare</h2>
+          <h2>Agenda</h2>
           <p>Programma su due giornate: sessione scientifica e casi applicativi il 19 giugno, istituzioni e progetti PNRR il 20 giugno.</p>
         </div>
 
@@ -680,86 +960,32 @@
         <div class="day" id="day-20" role="tabpanel" hidden>
           <div class="day-title"><h3>Sabato 20 Giugno 2026</h3><span>Istituzioni, tavola rotonda e progetti PNRR</span></div>
           <div class="card">
-            <div class="agenda" data-speaker-popup="false"><div class="time">09:30</div><div><span class="tag">Istituzioni</span><h3>Saluti delle istituzioni</h3><p>Rettore UNISA e Presidente Regione Campania.</p></div></div>
-            <div class="agenda" data-speaker-popup="false"><div class="time">10:15</div><div><span class="tag">Europa</span><h3>Commissione Europea DG Health</h3></div></div>
-            <div class="agenda" data-speaker-popup="false"><div class="time">10:35</div><div><span class="tag">MUR</span><h3>Intervento MUR</h3><p>Direttore generale o Sottosegretario.</p></div></div>
-            <div class="agenda" data-speaker-popup="false"><div class="time">10:55</div><div><span class="tag">Salute</span><h3>Ministero della Salute o Istituto Superiore di Sanità</h3><p>Ministro, Sottosegretario, Direttrice ISS o Evaristo Cisbani.</p></div></div>
-            <div class="agenda" data-speaker-popup="false"><div class="time">11:15</div><div><span class="tag">Pausa</span><h3>Coffee break</h3></div></div>
-            <div class="agenda" data-speaker-popup="false"><div class="time">11:30</div><div><span class="tag">AGENAS</span><h3>Piattaforma MIA - Medicina e Intelligenza Artificiale</h3><p>Responsabile Innovazione.</p></div></div>
-            <div class="agenda" data-speaker-popup="false"><div class="time">11:55</div><div><span class="tag">Caso studio</span><h3>IA e innovazione nella ricerca clinica: un caso di studio</h3><p>Prof. Carlo Tacchetti</p></div></div>
-            <div class="agenda" data-speaker-popup="false"><div class="time">12:15</div><div><span class="tag">Tavola rotonda</span><h3>IA in medicina</h3><p>Con Human Technopole, TIGEM, relatori e responsabili dei progetti.</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">09:30</div><div><span class="tag">Istituzioni</span><h3>Saluti delle istituzioni</h3><p>Rettore UNISA.</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">10:00</div><div><span class="tag">Europa</span><h3>Commissione Europea DG Health e della Sicurezza Alimentare</h3><p>Direttore Dott. Marco Marsella.</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">10:20</div><div><span class="tag">Ministero Della Salute</span><h3>Dipartimento della prevenzione, della ricerca e delle emergenze sanitarie</h3><p>Capo Dipartimento Dott.ssa Maria Rosaria Campitiello · TBC.</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">10:40</div><div><span class="tag">Salute</span><h3>Istituto Superiore di Sanità</h3><p>TBC.</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">11:00</div><div><span class="tag">Pausa</span><h3>Coffee break</h3></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">11:15</div><div><span class="tag">AGENAS</span><h3>Piattaforma MIA - Medicina e Intelligenza Artificiale</h3><p>Direttore Dott. Angelo Tanese · TBC.</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">11:35</div><div><span class="tag">Regione Campania</span><h3>Direzione Generale Salute</h3><p>Dott. Ugo Trama.</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">11:55</div><div><span class="tag">Salute</span><h3>ASL Salerno</h3><p>Direttore Generale Ing. Gennaro Sosto.</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">12:15</div><div><span class="tag">Caso Studio</span><h3>IA e l'innovazione nella ricerca clinica</h3><p>Prof. Carlo Tacchetti</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">12:35</div><div><span class="tag">Tavola rotonda</span><h3>IA in medicina</h3></div></div>
             <div class="agenda" data-speaker-popup="false"><div class="time">13:15</div><div><span class="tag">Pausa</span><h3>Pranzo</h3></div></div>
             <div class="agenda" data-speaker-popup="false"><div class="time">14:30</div><div><span class="tag">Progetti PNRR</span><h3>HEAL ITALIA</h3></div></div>
-            <div class="agenda" data-speaker-popup="false"><div class="time">14:55</div><div><span class="tag">Progetti PNRR</span><h3>AGE-IT</h3><p>Università degli Studi di Milano-Bicocca.</p></div></div>
-            <div class="agenda" data-speaker-popup="false"><div class="time">15:20</div><div><span class="tag">Progetti PNRR</span><h3>Sviluppo di Terapia Genica e Farmaci con Tecnologia a RNA</h3><p>Prof.ssa Elena Ciaglia</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">14:55</div><div><span class="tag">Progetti PNRR</span><h3>AGE-IT</h3><p>Prof.ssa Francesca Gasperini · Università degli Studi di Milano-Bicocca.</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">15:20</div><div><span class="tag">Progetti PNRR</span><h3>Sviluppo di Terapia Genica e Farmaci con Tecnologia a RNA</h3><p>Prof.ssa Elena Ciaglia  · Università degli Studi di Salerno</p></div></div>
             <div class="agenda" data-speaker-popup="false"><div class="time">15:45</div><div><span class="tag">Pausa</span><h3>Coffee break</h3></div></div>
-            <div class="agenda" data-speaker-popup="false"><div class="time">16:00</div><div><span class="tag">Progetti PNRR</span><h3>D³4Health</h3><p>Prof. Michele Mappi, Prof.ssa Lucia Cascone</p></div></div>
-            <div class="agenda" data-speaker-popup="false"><div class="time">16:25</div><div><span class="tag">Progetti PNRR</span><h3>PRP@CERIC</h3><p>Prof. Edoardo Sommella, Prof. Pierluigi Ritrovato</p></div></div>
-            <div class="agenda" data-speaker-popup="false"><div class="time">16:50</div><div><span class="tag">Progetti PNRR</span><h3>FIT4MedicalRobotics e Centro di eccellenza CoE-Rehab</h3><p>Riabilitazione con Robotica e Tecnologie Avanzate · Irene Giovanna Aprile e Marco Germanotta, Fondazione Carlo Don Gnocchi.</p></div></div>
-            <div class="agenda" data-speaker-popup="false"><div class="time">17:15</div><div><span class="tag">Chiusura</span><h3>Fine lavori</h3></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">16:00</div><div><span class="tag">Progetti PNRR</span><h3>D³4Health</h3><p>Prof. Michele Mappi, Prof.ssa Lucia Cascone · Università degli Studi di Salerno</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">16:25</div><div><span class="tag">Progetti PNRR</span><h3>PRP@CERIC</h3><p>Prof. Edoardo Sommella, Prof. Pierluigi Ritrovato · Università degli Studi di Salerno</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">16:50</div><div><span class="tag">Progetti PNRR</span><h3>FIT4MedicalRobotics e Centro di eccellenza CoE-Rehab</h3><p>Riabilitazione con Robotica e Tecnologie Avanzate · Dott.ssa Irene Giovanna Aprile, Ing. Marco Germanotta · Fondazione Carlo Don Gnocchi.</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">17:15</div><div><span class="tag">Progetti PNRR</span><h3>Revert - taRgeted thErapy for adVanced colorEctal canceR paTients</h3><p>Prof.ssa Fiorella Guadagni · Università San Raffaele Roma</p></div></div>
+            <div class="agenda" data-speaker-popup="false"><div class="time">17:40</div><div><span class="tag">Chiusura</span><h3>Fine lavori</h3></div></div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="comitato-scientifico">
-      <div class="container">
-        <div class="section-head">
-          <!-- <span class="kicker">Comitato Scientifico</span> -->
-          <h2>Cordinamento scientifico</h2>
-          <!-- <p>Referenti scientifici del convegno.</p> -->
-        </div>
-        <div class="organizers-grid scientific-grid">
-          <a class="card organizer-card" href="https://docenti.unisa.it/003741/home" target="_blank" rel="noopener noreferrer">
-            <div class="organizer-photo" ><img src="src/pj.jpg" alt="Pierluigi Ritrovato"></div>
-            <h3>Prof. Pierluigi Ritrovato</h3>
-            <p>Professore Ordinario DIEM@UniSA</p>
-          </a>
-          <a class="card organizer-card" href="https://docenti.unisa.it/005820/home" target="_blank" rel="noopener noreferrer">
-            <div class="organizer-photo"><img src="src/pietro_campiglia.jpg" alt="Pietro Campiglia"></div>
-            <h3>Prof. Pietro Campiglia</h3>
-            <p>Professore Ordinario DIFARMA@UniSA</p>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section id="organizzatori">
-      <div class="container">
-        <div class="section-head">
-          <!-- <span class="kicker">Comitato organizzatore</span> -->
-          <h2>Comitato organizzatore</h2>
-          <!-- <p>Riferimenti organizzativi del convegno.</p> -->
-        </div>
-        <div class="organizers-grid">
-          <a class="card organizer-card" href="https://docenti.unisa.it/003741/home" target="_blank" rel="noopener noreferrer">
-            <div class="organizer-photo"><img src="src/pj.jpg" alt="Pierluigi Ritrovato"></div>
-            <h3>Prof. Pierluigi Ritrovato</h3>
-            <p>Professore Ordinario @UniSA</p>
-          </a>
-          <a class="card organizer-card" href="https://docenti.unisa.it/003780/home" target="_blank" rel="noopener noreferrer">
-            <div class="organizer-photo"><img src="src/angelo_marcelli.jpg" alt="Angelo Marcelli"></div>
-            <h3>Prof. Angelo Marcelli</h3>
-            <p>Professore Ordinario @UniSA</p>
-          </a>
-          <a class="card organizer-card" href="https://www.unisalento.it/scheda-utente/-/people/mario.bochicchio" target="_blank" rel="noopener noreferrer">
-            <div class="organizer-photo"><img src="src/mario_Bochicchio.jpeg" alt="Mario Bochicchio"></div>
-            <h3>Prof. Mario Bochicchio</h3>
-            <p>Professore Associato @UniSalento</p>
-          </a>
-          <a class="card organizer-card" href="https://www.unimib.it/giancarlo-mauri" target="_blank" rel="noopener noreferrer">
-            <div class="organizer-photo"><img src="src/Giancarlo_Mauri.jpg" alt="Giancarlo Mauri"></div>
-            <h3>Prof. Giancarlo Mauri</h3>
-            <p>Professore Emerito @UniMIB</p>
-          </a>
-          <a class="card organizer-card" href="https://www.associazioneaitim.it/direttivo/francesco-sicurello/" target="_blank" rel="noopener noreferrer">
-            <div class="organizer-photo"><img src="src/Francesco_Sicurello.webp" alt="Francesco Sicurello"></div>
-            <h3>Prof. Francesco Sicurello</h3>
-            <p>Presidente Emerito di @ITIM</p>
-          </a>
-        </div>
-      </div>
-    </section>
+    
 
     <section id="promotori">
       <div class="container">
@@ -866,7 +1092,7 @@
     </section>
 
     <section id="sede">
-      <div class="container grid-2">
+      <div class="container venue-grid">
         <div class="section-head">
           <span class="kicker">Sede</span>
           <h2>Palazzo Innovazione, Salerno</h2>
@@ -875,13 +1101,14 @@
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.150136291156!2d14.755644276693168!3d40.68092783951623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133bc228d223c0d7%3A0xdd2b0bd1c72d0374!2sPalazzo%20Innovazione!5e1!3m2!1sit!2sit!4v1779354126151!5m2!1sit!2sit" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mappa Palazzo Innovazione, Salerno"></iframe>
           </div>
         </div>
-        <div class="highlight">
-          <span class="kicker" style="color:white">Partecipa</span>
-          <h2>Conferma la tua presenza</h2>
-          <p>Per partecipare al convegno è <b>obbligatorio</b> compilare il form di registrazione. La partecipazione è aperta a ricercatori, clinici, professionisti e aziende del settore.</p>
-          
-          <a class="button secondary large-cta" href="https://forms.gle/nQ9ZgYMw1XM94YJCA" style="margin-top:18px">Compila il Form</a>
-        </div>
+        <article class="hotel-card">
+          <div>
+            <span class="kicker">Alloggio convenzionato</span>
+            <h3>Grand Hotel Salerno</h3>
+            <p class="entity-note">Per i partecipanti al convegno è prevista una convenzione con il Grand Hotel Salerno, soluzione di riferimento per il soggiorno durante le giornate del 19 e 20 giugno 2026.</p>
+          </div>
+          <a class="hotel-badge" href="https://www.grandhotelsalerno.com/" target="_blank" rel="noopener noreferrer">Visita il Sito</a>
+        </article>
       </div>
     </section>
   </main>
@@ -919,7 +1146,7 @@
       'Prof. Pierluigi Ritrovato': {
         photo: 'src/pj.jpg',
         role: 'Universita degli Studi di Salerno',
-        description: 'Professore ordinario al DIEM dell\'Universita degli Studi di Salerno. Si occupa di tecnologie digitali, intelligenza artificiale, sistemi intelligenti per formazione, sanita digitale e supporto ai processi decisionali.'
+        description: "Pierluigi Ritrovato è Professore ordinario di Sistemi di Elaborazione presso il Dipartimento di Ingegneria dell’Informazione ed Elettrica e Matematica Applicata dell’Università degli Studi di Salerno. È docente dei corsi di Medical Software Engineering, Computational Genomics e Digital Health Systems and Applications della laurea magistrale in Information Engineering for Digital Medicine e del corso di Software Architecture Design alla laurea magistrale in Ingegneria Informatica. Ha svolto e svolge attività di ricerca nei settori dell’intelligenza artificiale applicata alla salute digitale ed alla medicina di precisione, dell’Internet of Medical Things, dell’Ingegneria del Software con particolare riferimento all’applicazione dei Large Language Models per la generazione automatica del codice, Sistemi distribuiti su larga scala (Grid Computing e HPC), sistemi di Learning e Knowledge Management."
       },
       'Prof. Angelo Marcelli': {
         photo: 'src/angelo_marcelli.jpg',
@@ -982,8 +1209,9 @@
         description: "Stefano Mazzoleni (MsC Computer Engineering 2002, PhD 2007, IEEE Senior member) è Professore Associato di Bioingegneria presso il Dipartimento di Ingegneria Elettrica e Informatica del Politecnico di Bari e presso la Scuola IMT Alti Studi Lucca. È Professore Affiliato alla Scuola Superiore Sant'Anna di Pisa. È autore di oltre 230 pubblicazioni scientifiche su riviste peer-reviewed e conferenze nazionali/internazionali, è coordinatore scientifico di numerosi progetti di ricerca nazionali e internazionali ed è membro di diversi comitati editoriali di riviste scientifiche internazionali nei settori della robotica, della bioingegneria e della riabilitazione. I suoi interessi di ricerca includono i) la progettazione, lo sviluppo e la validazione di sistemi robotici e meccatronici per la neuroriabilitazione, ii) lo sviluppo di modelli di analisi multimodale di dati (misurazioni cinematiche, variabili fisiologiche, scale di valutazione funzionale) e iii) lo sviluppo di algoritmi di machine learning  e deep learning per la neuroriabilitazione"
       },
       'Prof. Eugenio Santoro': {
+      photo: 'src/eugenio_santoro.JPG',
         role: 'Istituto Mario Negri',
-        description: 'Ricercatore impegnato nella sanita digitale, nelle terapie digitali e nell\'uso responsabile delle tecnologie informatiche per migliorare prevenzione, cura e comunicazione sanitaria.'
+        description: "Eugenio Santoro è un ricercatore esperto di digital health e lavora all’Istituto di Ricerche Farmacologiche Mario Negri IRCCS dove oggi dirige l’Unità per la ricerca in sanità digitale e terapie digitali. Dal 2006 si occupa di social media, app, wearable, Intelligenza artificiale e terapie digitali e del loro impatto sulla pratica clinica, sulla cura e sulla comunicazione della salute. Autore di oltre 300 articoli scientifici, ha pubblicato i volumi “Web 2.0 e social media in medicina”, “Facebook, Twitter e la medicina”, “Guida alla medicina in rete” e “Internet in medicina” (tutti editi da Il Pensiero Scientifico Editore). Nel 2021 ha curato la voce “Digital Health” per la  X Appendice dell’enciclopedia Treccani dedicata alle parole del XXI secolo, E’ membro del gruppo ICT di FNOMCeO (la Federazione Nazionale degli Ordini dei Medici Chirurghi e degli Odontoiatri), del Comitato Tecnico Scientifico dell’Intergruppo Parlamentare su sanità digitale e terapie digitali, del Gruppo di Lavoro “Valutazione di tecnologie di intelligenza artificiale in ambito sanitario e sociosanitario” istituito dalla Giunta Regionale della Regione Emilia-Romagna e del Comitato di Controllo dell’Istituto di Autodisciplina Pubblicitaria (IAP). E’ stato inoltre membro del gruppo di lavoro che per conto del Consiglio di Superiore di Sanità e del Ministero della Salute ha redatto il documento “I sistemi di intelligenza artificiale come strumento di supporto alla diagnostica”. Negli ultimi 10 anni ha infine insegnato “Digital health” presso la facoltà di Medicine e Chirurgia dell’Università di Milano e “Social media per la comunicazione della medicina e della scienza” presso il Master di I livello “MACSIS” dell’Università Bicocca di Milano. Attualmente insegna al master “Executive Master in Gestione dell'Innovazione in Sanità “del Graduate School of Management del Politecnico di Milano, al Master “Health Communication Specialist” dell’Università Cattolica di Milano, al master “Comunicazione Scientifica” dell’Università di Parma e al master “DAI4Health: Innovazione Digitale e Intelligenza Artificiale nel Settore Sanitario” dell’Università Bicocca di Milano."
       },
       'Prof. Giuseppe Lanza': {
         photo: 'src/giuseppe_lanza.png',
@@ -1157,6 +1385,9 @@
         Nuovi scenari per la prevenzione, la diagnosi e la cura · 19–20 Giugno 2026 · Palazzo Innovazione, Salerno.<br />
         <p>Email: <a href="mailto:pritrovato@unisa.it">pritrovato@unisa.it</a></p>
         © 2026 IA in Medicina · Tutti i diritti riservati.
+        Foto copertina di <a href="https://unsplash.com/it/@ciro_mag?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Ciro Magliano</a> su <a href="https://unsplash.com/it/foto/vista-sulla-citta-costiera-con-onde-delloceano-e-piante-verdi-6iWF-0YA-gY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+      
+      
       </div>
       <div class="footer-logo">
         <img src="src/unisa.png" alt="Logo Università degli Studi di Salerno">
